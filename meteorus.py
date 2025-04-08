@@ -19,8 +19,7 @@ class GrafanaMeteoriteAlertSender:
 
     def send_alert(self, event_time, probability, photo_url, state="alerting"):
         # Форматирование времени для уведомления
-        alert_time = timestamp_to_str(event_time)
-        formatted_time = alert_time.strftime("%Y-%m-%d %H:%M:%S")
+        formatted_time = timestamp_to_str(event_time)
         
         # Заголовок и сообщение уведомления
         title = f"Обнаружена угроза метеоритного удара"

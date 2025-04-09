@@ -1,3 +1,6 @@
+# Meteorus - program that detects meteorites and rocket debris and sends alerts to Grafana
+# Copyright (C) 2025 George Bartolomey, Nikita Yusko
+
 import cv2
 import argparse
 import numpy as np

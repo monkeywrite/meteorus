@@ -43,7 +43,7 @@ python3 meteorus.py \
 
 - `--mailru_oauth_token`: OAuth-токен Mail.ru для авторизации.
 - `--grafana-webhook-url`: URL вебхука Grafana для отправки уведомлений.
-- `--video`: Путь к видеофайлу, который нужно проанализировать.
+- `--video`: Путь к видеофайлу, который нужно проанализировать или путь к V4L2 устройству.
 - `--mask`: Путь к файлу маски для фильтрации областей интереса.
 
 ### Запуск через Docker
@@ -57,15 +57,11 @@ docker build -t meteorus .
 2. Запустите контейнер:
 
 ```bash
-docker run -it \
-    -v /path/to/your/video:/app/video \
-    -v /path/to/your/mask:/app/mask \
-    meteorus \
-    python3 meteorus.py \
-    --mailru_oauth_token [ваш_токен] \
-    --grafana-webhook-url [ваш_хук_grafana] \
-    --video /app/video/your_video.mp4 \
-    --mask /app/mask/your_mask.png
+docker build -t meteorus .
+docker run -v /path/to/your/data:/data meteorus \
+    --video /data/video.mp4 --mask /data/mask.png \
+    --mailru_oauth_token "your_oauth_token" \
+    --grafana-webhook-url "your_webhook_url" 
 ```
 
 ---
@@ -103,7 +99,7 @@ Meteorus имеет широкий спектр применения в разл
 
 ## Лицензия
 
-Проект распространяется под лицензией MIT. Подробности см. в файле [LICENSE](LICENSE).
+Проект распространяется под лицензией GNU GPLv3. Подробности см. в файле [LICENSE](LICENSE).
 
 ---
 
@@ -116,23 +112,6 @@ Meteorus имеет широкий спектр применения в разл
 
 ---
 
-## Dockerfile
-
-В проекте используется Dockerfile для создания контейнера. Он содержит все необходимые зависимости и настройки для запуска приложения. Пример содержимого Dockerfile:
-
-```Dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["python3", "meteorus.py"]
-```
-
----
-
 Спасибо за интерес к проекту Meteorus! Мы надеемся, что он окажется полезным для вас и ваших исследований.
+
+Copyright &copy; 2025 Георгий Бартоломей, Никита Юсько
